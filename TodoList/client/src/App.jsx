@@ -39,6 +39,39 @@ function App() {
     fetch(`${API}/${id}`, { method: "DELETE" })
       .then(() => setTareas(tareas.filter(t => t.id !== id)))
   }
+  
+  function descargarTareas() {
+    setDescargando(true)
+    setTimeout(() => {
+      const contenido = JSON.stringify(tareas, null, 2)
+      const blob = new Blob([contenido], { type: "application/json" })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement("a")
+      a.href = url
+      a.download = "tareas.json"
+      a.click()
+      URL.revokeObjectURL(url)
+      setDescargando(false)
+    }, 1200)
+  }
+
+  function subirTarea(e) {
+    const archivo = e.target.files[0]
+    if (!archivo) return
+    setSubiendo(true)
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+      try {
+        const datos = JSON.parse(ev.target.result)
+        setTareas(datos)
+      } catch {
+        alert("El archivo no es válido")
+      }
+      setSubiendo(false)
+      e.target.value = ""
+    }
+    reader.readAsText(archivo)
+  }
 
   return (
     <div>
