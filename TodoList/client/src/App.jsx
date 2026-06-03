@@ -9,12 +9,19 @@ function App() {
   const [terminado, setTerminado] = useState("")
   const [subiendo, setSubiendo] = useState(false)
   const [descargando, setDescargando] = useState(false)
+  const [token, setToken] = useState("")
+  const [usuario, setUsuario] = useState("")
+  const [contraseña, setContraseña] = useState("")
+  const [registrando, setRegistrando] = useState(false)
 
   useEffect(() => {
-    fetch(API)
+    if (!token) return
+    fetch (API,{
+      headers: {authorization: token}
+    })
       .then(res => res.json())
       .then(data => setTareas(data))
-  }, [])
+  }, [token])
 
   function agregarTarea() {
     if (!descripcion || !fecha || !terminado) {
@@ -23,7 +30,7 @@ function App() {
     }
     fetch(API, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", authorization: token},
       body: JSON.stringify({ descripcion, fecha, terminado })
     })
       .then(res => res.json())
@@ -36,7 +43,9 @@ function App() {
   }
 
    function eliminarTarea(id) {
-    fetch(`${API}/${id}`, { method: "DELETE" })
+    fetch(`${API}/${id}`, { method: "DELETE",
+    headers: { authorization: token }
+  })
       .then(() => setTareas(tareas.filter(t => t.id !== id)))
   }
   
@@ -74,6 +83,27 @@ function App() {
   }
 
   return (
+    <div>
+    {!token ? (
+  <div>
+    <h1>{registrando ? "Registrarse" : "Iniciar sesión"}</h1>
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "300px" }}>
+      <input value={usuario} onChange={(e) => setUsuario(e.target.value)} placeholder="Usuario" />
+      <input type="password" value={contraseña} onChange={(e) => setContraseña(e.target.value)} placeholder="Contraseña" />
+      {registrando ? (
+        <>
+          <button className="btn-agregar" onClick={registrar}>Registrarse</button>
+          <button onClick={() => setRegistrando(false)}>Ya tengo cuenta</button>
+        </>
+      ) : (
+        <>
+          <button className="btn-agregar" onClick={login}>Iniciar sesión</button>
+          <button onClick={() => setRegistrando(true)}>Crear cuenta</button>
+        </>
+      )}
+    </div>
+  </div>
+) : (
     <div>
       <h1>Todo-List</h1>
 
@@ -126,6 +156,8 @@ function App() {
         </tbody>
       </table>
     </div>
+    )}
+  </div>
   )
 }
 
