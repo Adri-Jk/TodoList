@@ -82,6 +82,35 @@ function App() {
     reader.readAsText(archivo)
   }
 
+  function login(){
+    fetch("http://localhost:3000/api/login" ,{
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({usuario, contraseña})
+  })
+  .then(res => res.json())
+  .then(data =>{
+    if (data.token){
+      setToken(data.token)
+    }else{
+      alert(data.mensaje)
+    }
+  })
+  }
+
+  function registrar() {
+  fetch("http://localhost:3000/api/registrar", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ usuario, contraseña })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.mensaje)
+    setRegistrando(false)
+  })
+}
+
   return (
     <div>
     {!token ? (
