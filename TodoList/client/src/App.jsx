@@ -104,6 +104,105 @@ function App() {
   reader.readAsText(archivo)
 }
 
+function subirArchivo(){
+    if (!archivo){
+      alert("Selecciona un archivo")
+      return 
+    }
+    setSubiendoArchivo(true)
+    const formData = new FormData()
+    formData.append('archivo', archivo)
+    fetch ("https://localhost:3000/api/upload",{
+      method: "POST",
+      headers: {authorization:token},
+      body: formData
+      })
+      .then(res => res.json())
+      .then(data =>{
+      setArchivos([...archivos, data])
+      setSubiendoArchivo(false)
+      setArchivo(null)
+      })
+    .catch(err => {
+    console.log(err)
+    setSubiendoArchivo(false)
+  })
+  }
+
+  function subirArchivo(){
+    if (!archivo){
+      alert("Selecciona un archivo")
+      return 
+    }
+    setSubiendoArchivo(true)
+    const formData = new FormData()
+    formData.append('archivo', archivo)
+    fetch ("https://localhost:3000/api/upload",{
+      method: "POST",
+      headers: {authorization:token},
+      body: formData
+      })
+      .then(res => res.json())
+      .then(data =>{
+      setArchivos([...archivos, data])
+      setSubiendoArchivo(false)
+      setArchivo(null)
+      })
+    .catch(err => {
+    console.log(err)
+    setSubiendoArchivo(false)
+  })
+  }
+  function subirArchivo(){
+    if (!archivo){
+      alert("Selecciona un archivo")
+      return 
+    }
+    setSubiendoArchivo(true)
+    const formData = new FormData()
+    formData.append('archivo', archivo)
+    fetch ("https://localhost:3000/api/upload",{
+      method: "POST",
+      headers: {authorization:token},
+      body: formData
+      })
+      .then(res => res.json())
+      .then(data =>{
+      setArchivos([...archivos, data])
+      setSubiendoArchivo(false)
+      setArchivo(null)
+      })
+    .catch(err => {
+    console.log(err)
+    setSubiendoArchivo(false)
+  })
+  }
+  
+  function subirArchivo(){
+    if (!archivo){
+      alert("Selecciona un archivo")
+      return 
+    }
+    setSubiendoArchivo(true)
+    const formData = new FormData()
+    formData.append('archivo', archivo)
+    fetch ("https://localhost:3000/api/upload",{
+      method: "POST",
+      headers: {authorization:token},
+      body: formData
+      })
+      .then(res => res.json())
+      .then(data =>{
+      setArchivos([...archivos, data])
+      setSubiendoArchivo(false)
+      setArchivo(null)
+      })
+    .catch(err => {
+    console.log(err)
+    setSubiendoArchivo(false)
+  })
+  }
+
   function login(){
     fetch("https://localhost:3000/api/login" ,{
       method: "POST",
