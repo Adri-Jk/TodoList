@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "descripcion": "carne",
+    "fecha": "2026-06-18",
+    "terminado": "no",
+    "usuario_id": 1
+  },
+  {
+    "id": 2,
+    "descripcion": "leche",
+    "fecha": "2026-06-10",
+    "terminado": "no",
+    "usuario_id": 1
+  }
+]

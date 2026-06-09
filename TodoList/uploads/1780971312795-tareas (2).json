@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1779821610401,
+    "descripcion": "Pollo",
+    "fecha": "2026-05-30",
+    "terminado": "no"
+  },
+  {
+    "id": 1779821620764,
+    "descripcion": "Carne",
+    "fecha": "2026-06-07",
+    "terminado": "no"
+  },
+  {
+    "id": 1779821649650,
+    "descripcion": "Leche",
+    "fecha": "2026-05-30",
+    "terminado": "no"
+  }
+]
